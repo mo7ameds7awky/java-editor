@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
  * @author Sharp team
  */
 public class MainForm extends javax.swing.JFrame {
-    
+
     private static MainForm mainform;
     private String textCheckSaved = "";
     private boolean saved = true;
@@ -17,12 +17,13 @@ public class MainForm extends javax.swing.JFrame {
 
     private MainForm() {
         initComponents();
-        this.setTitle("My Text Editor(MTE)");
+        this.setTitle("Java IDE");
     }
-    public static MainForm getInstance(){
-        if(mainform == null){
-            synchronized(MainForm.class){
-                if (mainform == null){
+
+    public static MainForm getInstance() {
+        if (mainform == null) {
+            synchronized (MainForm.class) {
+                if (mainform == null) {
                     mainform = new MainForm();
                 }
             }
@@ -140,7 +141,7 @@ public class MainForm extends javax.swing.JFrame {
 
     public void setFileSaveAs(JMenuItem fileSaveAs) {
         this.fileSaveAs = fileSaveAs;
-    }  
+    }
 
     public boolean isSaved() {
         return saved;
@@ -173,7 +174,7 @@ public class MainForm extends javax.swing.JFrame {
     public void setEditChangeFont(JMenuItem editChangeFont) {
         this.editChangeFont = editChangeFont;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -236,6 +237,11 @@ public class MainForm extends javax.swing.JFrame {
         menuFile.setText("File");
 
         fileNew.setText("New");
+        fileNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileNewActionPerformed(evt);
+            }
+        });
         menuFile.add(fileNew);
 
         fileOpen.setText("Open");
@@ -243,12 +249,27 @@ public class MainForm extends javax.swing.JFrame {
         menuFile.add(jSeparator1);
 
         fileSave.setText("Save");
+        fileSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileSaveActionPerformed(evt);
+            }
+        });
         menuFile.add(fileSave);
 
         fileSaveAs.setText("Save As");
+        fileSaveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileSaveAsActionPerformed(evt);
+            }
+        });
         menuFile.add(fileSaveAs);
 
-        fileExit.setText("Exit ");
+        fileExit.setText("Exit");
+        fileExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileExitActionPerformed(evt);
+            }
+        });
         menuFile.add(fileExit);
 
         menuBar.add(menuFile);
@@ -301,6 +322,22 @@ public class MainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void fileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileSaveActionPerformed
+
+    }//GEN-LAST:event_fileSaveActionPerformed
+
+    private void fileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileNewActionPerformed
+
+    private void fileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileExitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileExitActionPerformed
+
+    private void fileSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileSaveAsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileSaveAsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

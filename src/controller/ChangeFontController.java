@@ -6,11 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -45,87 +42,69 @@ public class ChangeFontController {
 
     // when user change font
     public void changeFont(MainForm mainForm, ChangeFontForm changeFontForm) {
-        changeFontForm.getListFont().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                String fontChoose = changeFontForm.getListFont().getSelectedValue();
-                int styleCurrent = changeFontForm.getTextReview().getFont().getStyle();
-                int sizeCurrent = changeFontForm.getTextReview().getFont().getSize();
-                changeFontForm.getTextFont().setText(fontChoose);
-                changeFontForm.getTextReview().setFont(new Font(fontChoose, styleCurrent, sizeCurrent));
-            }
+        changeFontForm.getListFont().addListSelectionListener((ListSelectionEvent e) -> {
+            String fontChoose = changeFontForm.getListFont().getSelectedValue();
+            int styleCurrent = changeFontForm.getTextReview().getFont().getStyle();
+            int sizeCurrent = changeFontForm.getTextReview().getFont().getSize();
+            changeFontForm.getTextFont().setText(fontChoose);
+            changeFontForm.getTextReview().setFont(new Font(fontChoose, styleCurrent, sizeCurrent));
         });
     }
 
     // when user change style
     public void changeStyle(MainForm mainForm, ChangeFontForm changeFontForm) {
-        changeFontForm.getListStyle().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                int styleChoose = changeFontForm.getListStyle().getSelectedIndex();
-                String fontCurrent = changeFontForm.getTextReview().getFont().getFontName();
-                int sizeCurrent = changeFontForm.getTextReview().getFont().getSize();
-                switch (styleChoose) {
-                    case 0:
-                        changeFontForm.getTextStyle().setText("Regular");
-                        break;
-                    case 1:
-                        changeFontForm.getTextStyle().setText("Bold");
-                        break;
-                    case 2:
-                        changeFontForm.getTextStyle().setText("Italic");
-                        break;
-                    case 3:
-                        changeFontForm.getTextStyle().setText("Bold Italic");
-                        break;
-                }
-                changeFontForm.getTextReview().setFont(new Font(fontCurrent, styleChoose, sizeCurrent));
+        changeFontForm.getListStyle().addListSelectionListener((ListSelectionEvent e) -> {
+            int styleChoose = changeFontForm.getListStyle().getSelectedIndex();
+            String fontCurrent = changeFontForm.getTextReview().getFont().getFontName();
+            int sizeCurrent = changeFontForm.getTextReview().getFont().getSize();
+            switch (styleChoose) {
+                case 0:
+                    changeFontForm.getTextStyle().setText("Regular");
+                    break;
+                case 1:
+                    changeFontForm.getTextStyle().setText("Bold");
+                    break;
+                case 2:
+                    changeFontForm.getTextStyle().setText("Italic");
+                    break;
+                case 3:
+                    changeFontForm.getTextStyle().setText("Bold Italic");
+                    break;
             }
+            changeFontForm.getTextReview().setFont(new Font(fontCurrent, styleChoose, sizeCurrent));
         });
     }
 
     // when user change size
     public void changeSize(MainForm mainForm, ChangeFontForm changeFontForm) {
-        changeFontForm.getListSize().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                String sizeChoose = changeFontForm.getListSize().getSelectedValue();
+        changeFontForm.getListSize().addListSelectionListener((ListSelectionEvent e) -> {
+            String sizeChoose = changeFontForm.getListSize().getSelectedValue();
+            String fontCurrent = changeFontForm.getTextReview().getFont().getFontName();
+            int styleCurrent = changeFontForm.getTextReview().getFont().getStyle();
+            changeFontForm.getTextSize().setText(sizeChoose);
+            changeFontForm.getTextReview().setFont(new Font(fontCurrent, styleCurrent, Integer.parseInt(sizeChoose)));
+        });
+        changeFontForm.getTextSize().addCaretListener((CaretEvent e) -> {
+            String sizeChoose = changeFontForm.getTextSize().getText();
+            if (!"".equals(sizeChoose)) {
                 String fontCurrent = changeFontForm.getTextReview().getFont().getFontName();
                 int styleCurrent = changeFontForm.getTextReview().getFont().getStyle();
-                changeFontForm.getTextSize().setText(sizeChoose);
                 changeFontForm.getTextReview().setFont(new Font(fontCurrent, styleCurrent, Integer.parseInt(sizeChoose)));
-            }
-        });
-        changeFontForm.getTextSize().addCaretListener(new CaretListener() {
-            @Override
-            public void caretUpdate(CaretEvent e) {
-                String sizeChoose = changeFontForm.getTextSize().getText();
-                if (sizeChoose != "") {
-                    String fontCurrent = changeFontForm.getTextReview().getFont().getFontName();
-                    int styleCurrent = changeFontForm.getTextReview().getFont().getStyle();
-                    changeFontForm.getTextReview().setFont(new Font(fontCurrent, styleCurrent, Integer.parseInt(sizeChoose)));
-                }
             }
         });
     }
 
     // click cancel or oke
     public void clickButtonChangeFontForm(MainForm mainForm, ChangeFontForm changeFontForm) {
-        changeFontForm.getBtnOk().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String fontCurrent = changeFontForm.getListFont().getSelectedValue();
-                int styleCurrent = changeFontForm.getListStyle().getSelectedIndex();
-                int sizeCurrent = Integer.parseInt(changeFontForm.getTextSize().getText());
-                mainForm.getTxtArea().setFont(new Font(fontCurrent, styleCurrent, sizeCurrent));
-                changeFontForm.setVisible(false);
-            }
+        changeFontForm.getBtnOk().addActionListener((ActionEvent e) -> {
+            String fontCurrent = changeFontForm.getListFont().getSelectedValue();
+            int styleCurrent = changeFontForm.getListStyle().getSelectedIndex();
+            int sizeCurrent = Integer.parseInt(changeFontForm.getTextSize().getText());
+            mainForm.getTxtArea().setFont(new Font(fontCurrent, styleCurrent, sizeCurrent));
+            changeFontForm.setVisible(false);
         });
-        changeFontForm.getBtnCancel().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeFontForm.setVisible(false);
-            }
+        changeFontForm.getBtnCancel().addActionListener((ActionEvent e) -> {
+            changeFontForm.setVisible(false);
         });
     }
 }
