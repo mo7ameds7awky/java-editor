@@ -14,9 +14,15 @@ import javax.swing.undo.UndoManager;
  *
  * @author Sharp team
  */
-public class EditController {
+public class EditController extends Controller implements FactoryController{
 
     // controller edit
+
+    /**
+     *
+     * @param mainForm
+     */
+        @Override
     public void controller(MainForm mainForm) {
         UndoManager manager = new UndoManager();
         mainForm.getTxtArea().getDocument().addUndoableEditListener(manager);

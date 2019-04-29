@@ -12,7 +12,7 @@ import javax.swing.JFileChooser;
  *
  * @author Sharp team
  */
-public class FileController extends Controller {
+public class FileController extends Controller implements FactoryController{
     CommandInvoker commandInvoker;
 
     // controller file
